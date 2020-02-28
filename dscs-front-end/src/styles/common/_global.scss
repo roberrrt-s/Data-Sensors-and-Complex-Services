@@ -1,0 +1,23 @@
+html {
+	@include responsive-font($font-size-fluid, $font-size-min, $font-size-max, $font-size-min);
+}
+
+body {
+	--color-background:#22272b;
+	--color-on-background:#fff;
+	--color-layer-transparent:rgba(0,5,11,0.9);
+	--color-surface:#F0F;
+	--color-primary:#0F0;
+	--color-on-primary:#fff;
+	--color-on-surface: #fff;
+	font-size: $font-size-base;
+}
+
+html,
+body,
+#app-container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100%;
+}
