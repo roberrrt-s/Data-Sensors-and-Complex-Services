@@ -26,11 +26,29 @@ class Profile extends Component {
 	}
 
 	render() {
-		let userInfo = null;
+		console.log(this.state.data)
+
+		let userInfo = this.state.data && this.state.data.user ? this.state.data.user : null;
+		let name = userInfo && userInfo.name ? userInfo.name : null
+		let email = userInfo && userInfo.email ? userInfo.email : null
+		let userId = userInfo && userInfo.id ? userInfo.id : null
+		let preferences = userInfo && userInfo.preferences ? userInfo.preferences : null
+
+		let listPref = preferences ? Object.keys(preferences).map((key, index) => {
+			return (
+				<li key={index}>{key}</li>
+			)
+		}) : null
 
 		return (
 			<main id="profile">
-				{userInfo}
+				{name}<br />
+				{email}<br />
+				{userId}<br />
+
+				<ul>
+					{listPref}
+				</ul>
 			</main>
 		)
 	}
