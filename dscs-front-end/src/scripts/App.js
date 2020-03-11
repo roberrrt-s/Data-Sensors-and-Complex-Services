@@ -1,8 +1,13 @@
 // Core
 import React, { Component } from 'react';
-import { HashRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { BrowserRouter } from 'react-router-dom';
+//import { Provider } from 'react-redux'
+//import { createStore } from 'redux'
 
+import Routes from "./routes/index"
+//import rootReducer from "./reducers/index";
+
+//const store = createStore(rootReducer);
 
 class App extends Component {
 	constructor() {
@@ -11,11 +16,14 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="l-app">
-				<p>if you see this, react + react router + redux work</p>
-			</div>
+			//<Provider store={store}>
+				<BrowserRouter>
+					<Routes />
+				</BrowserRouter>
+			//</Provider>
 		);
 	}
 }
 
 export default App;
+
