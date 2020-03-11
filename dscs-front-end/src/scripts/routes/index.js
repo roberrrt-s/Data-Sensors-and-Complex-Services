@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Home from "./Home";
 import Profile from "./Profile";
 import Quiz from "./Quiz";
-import Question from "./Question";
+import Questions from "./Questions";
 import Results from "./Results";
 
 class Routes extends Component {
@@ -23,10 +23,10 @@ class Routes extends Component {
 				<Route exact path="/quiz">
 					<Quiz />
 				</Route>
-				<Route path="/question/:questionId">
-					<Question />
+				<Route exact path="/questions/">
+					<Questions />
 				</Route>
-				<Route exact path="/result/">
+				<Route exact path="/results/">
 					<Results />
 				</Route>
 

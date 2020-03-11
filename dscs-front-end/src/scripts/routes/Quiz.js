@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Quiz extends Component {
 
@@ -9,7 +10,7 @@ class Quiz extends Component {
 	render() {
 		return (
 			<main id="quiz">
-				<p>quiz here</p>
+				<Link to="/questions">Start the quiz</Link>
 			</main>
 		)
 	}

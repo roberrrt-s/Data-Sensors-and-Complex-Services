@@ -18,8 +18,6 @@ class Profile extends Component {
 				.then(res => {
 					this.setState({data: res})
 				})
-
-			console.log(this.state.data)
 		}
 	}
 
@@ -28,9 +26,11 @@ class Profile extends Component {
 	}
 
 	render() {
+		let userInfo = null;
+
 		return (
 			<main id="profile">
-				{this.state && this.state.user ? this.state.user : null}
+				{userInfo}
 			</main>
 		)
 	}
