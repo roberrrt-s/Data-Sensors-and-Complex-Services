@@ -9,7 +9,7 @@ class Results extends Component {
 	render() {
 		return (
 			<main id="results">
-				<p>succes/fail here</p>
+				<p>succes/fail here, requires arts feedback</p>
 			</main>
 		)
 	}

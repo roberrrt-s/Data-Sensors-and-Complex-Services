@@ -58,10 +58,12 @@ class Questions extends Component {
 			<main id="questions">
 				<h1>Questions</h1>
 					<div className="b-questions">
-						{this.state.data && !this.state.quizDone ? (
+						{!this.state.data && !this.state.quizDone ? (
+							<p>Loading questions..</p>
+						) : this.state.data && !this.state.quizDone ? (
 							<Question cb={this.onClickHandler.bind(this)} question={this.state.data.quiz.questions[this.state.currentQuestionId]} questionId={this.state.currentQuestionId}/>
 						) : this.state.data && this.state.quizDone ? (
-							<p>{`you're done!`}</p>
+							<p>{`Quiz done! Checking your results.....`}</p>
 						) : null }
 						<Link to="/results">View results</Link>
 					</div>

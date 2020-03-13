@@ -41,10 +41,6 @@ class Routes extends Component {
 						/>
 					}
 				/>
-
-				<Route path="/spotify_callback">
-					<Redirect to="/profile" />
-				</Route>
 			</Switch>
 		)
 	}
