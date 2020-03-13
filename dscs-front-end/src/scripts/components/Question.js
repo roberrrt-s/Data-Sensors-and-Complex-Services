@@ -14,11 +14,11 @@ class Question extends Component {
 	}
 
 	onChange(e) {
-		e.preventDefault();
-
 		this.setState({
 			answer: e.target.value
 		})
+
+		console.log(`i fired with ${e.target.value}`)
 	}
 
 	onSubmit(e) {
@@ -35,8 +35,8 @@ class Question extends Component {
 			return (
 				this.props.question.multipleChoice.answers.map((el, i) => {
 					return (
-						<div className="b-question__label" key={i} id={`answer-${el.id}`}>
-							<input name="answer" type="radio" value={`id-${el.id}`} />
+						<div onChange={this.onChange} className="b-question__label" key={i} id={`answer-${el.id}`}>
+							<input name="answer" type="radio" value={el.id} id={`id-${el.id}`} />
 							<label htmlFor={`id-${el.id}`}>{el.value}</label>
 						</div>
 					)
@@ -57,7 +57,6 @@ class Question extends Component {
 				<h4>{this.props.question.question}</h4>
 				<form onSubmit={this.onSubmit.bind(this)}>
 					{options}
-					<input type="text" name="answer" value={this.state.answer} onChange={this.onChange} />
 					<input type="submit" value="Submit answer" />
 				</form>
 			</div>
