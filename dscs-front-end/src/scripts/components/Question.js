@@ -17,46 +17,67 @@ class Question extends Component {
 		this.setState({
 			answer: e.target.value
 		})
-
-		console.log(`i fired with ${e.target.value}`)
 	}
 
 	onSubmit(e) {
 		e.preventDefault();
-		this.props.cb(this.state.answer)
+
+		let answer = this.state.answer;
+
+		// Dear heavenly father forgive me for I have sinned.
+		document.querySelector('input[type=radio]:checked').checked = false;
 
 		this.setState({
 			answer: ''
+		}, () => {
+			this.props.cb(answer)
 		})
 	}
 
 	renderOptions() {
+		let uuid = Math.random().toString(36).substring(2, 8);
+
 		if(this.props.question.type === 'lyrics') {
 			return (
 				this.props.question.multipleChoice.answers.map((el, i) => {
 					return (
 						<div onChange={this.onChange} className="b-question__label" key={i} id={`answer-${el.id}`}>
-							<input name="answer" type="radio" value={el.id} id={`id-${el.id}`} />
+							<input name={`answer-${uuid}`} type="radio" value={el.id} id={`id-${el.id}`} />
 							<label htmlFor={`id-${el.id}`}>{el.value}</label>
 						</div>
 					)
 				})
 			)
+		} else if(this.props.question.type === 'albumcover') {
+			return (
+				this.props.question.multipleChoice.answers.map((el, i) => {
+					return (
+						<div onChange={this.onChange} className="b-question__label" key={i} id={`answer-${el.id}`}>
+							<input name={`answer-${uuid}`} type="radio" value={el.id} id={`id-${el.id}`} />
+							<label htmlFor={`id-${el.id}`}><img className="b-question__image" src={el.value} alt={`Cover image for answer ${el.id}`} /></label>
+						</div>
+					)
+				})
+			)
 		} else {
-			return <p>no</p>
+			return false
 		}
+
+
 	}
 
 	render() {
 		let options = this.renderOptions();
 
 		return (
-			<div className="b-question">
+			<div className={`b-question ${this.props.question.type}`}>
 				<p>Question {this.props.questionId + 1}</p>
 				<h3>{this.props.question.instruction}</h3>
 				<h4>{this.props.question.question}</h4>
 				<form onSubmit={this.onSubmit.bind(this)}>
-					{options}
+					<div className="b-question__questions">
+						{options}
+					</div>
 					<input type="submit" value="Submit answer" />
 				</form>
 			</div>

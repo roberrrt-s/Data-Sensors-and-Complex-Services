@@ -1,4 +1,9 @@
 .b-question {
+
+	input[type=submit] {
+		margin-top: .5rem;
+	}
+
 	&__label {
 		display: flex;
 		flex-flow: row nowrap;
@@ -11,6 +16,18 @@
 		label {
 			margin: 0;
 			padding-left: .5rem;
+		}
+	}
+
+	&__image {
+		width: 100px;
+		height: auto;
+	}
+
+	&.albumcover {
+		.b-question__questions {
+			display: flex;
+			flex-flow: row wrap;
 		}
 	}
 }
