@@ -30,11 +30,33 @@ class Question extends Component {
 		})
 	}
 
+	renderOptions() {
+		if(this.props.question.type === 'lyrics') {
+			return (
+				this.props.question.multipleChoice.answers.map((el, i) => {
+					return (
+						<div className="b-question__label" key={i} id={`answer-${el.id}`}>
+							<input name="answer" type="radio" value={`id-${el.id}`} />
+							<label htmlFor={`id-${el.id}`}>{el.value}</label>
+						</div>
+					)
+				})
+			)
+		} else {
+			return <p>no</p>
+		}
+	}
+
 	render() {
+		let options = this.renderOptions();
+
 		return (
-			<div className="question">
-				<p>this is question {this.props.questionId}</p>
+			<div className="b-question">
+				<p>Question {this.props.questionId + 1}</p>
+				<h3>{this.props.question.instruction}</h3>
+				<h4>{this.props.question.question}</h4>
 				<form onSubmit={this.onSubmit.bind(this)}>
+					{options}
 					<input type="text" name="answer" value={this.state.answer} onChange={this.onChange} />
 					<input type="submit" value="Submit answer" />
 				</form>
@@ -47,6 +69,7 @@ export default Question;
 
 Question.propTypes = {
 	questionId: PropTypes.number.isRequired,
+	question: PropTypes.object.isRequired,
 	cb: PropTypes.func,
 	test: PropTypes.number
 }
