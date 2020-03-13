@@ -25,7 +25,9 @@ class Question extends Component {
 		let answer = this.state.answer;
 
 		// Dear heavenly father forgive me for I have sinned.
-		document.querySelector('input[type=radio]:checked').checked = false;
+		// Dear group members who read this, I am not proud of what I have done
+		// But I will push this code, for those of you who wish to receive a 9 or higher
+		document.querySelector('.b-question__label input[type=radio]:checked').checked = false;
 
 		this.setState({
 			answer: ''
