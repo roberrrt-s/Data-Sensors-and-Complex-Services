@@ -20,12 +20,8 @@ class Routes extends Component {
 					<Home/>
 				</Route>
 				<Route exact path="/profile" render={(props) => <Profile {...props} data={this.props.data} />} />
-				<Route exact path="/quiz">
-					<Quiz />
-				</Route>
-				<Route exact path="/questions/">
-					<Questions />
-				</Route>
+				<Route exact path="/quiz/:matchId" render={(props) => <Quiz {...props} />}/>
+				<Route exact path="/questions/:matchId" render={(props) => <Questions {...props} />}/>
 				<Route exact path="/results/">
 					<Results />
 				</Route>
