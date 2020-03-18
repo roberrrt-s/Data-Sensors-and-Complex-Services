@@ -20,7 +20,7 @@ class Home extends Component {
 		let userId = cookies.get('userId');
 		let checkForUserId = true;
 
-		if(userId !== undefined && checkForUserId) {
+		if(userId && userId !== 'undefined' && checkForUserId) {
 			this.setState({
 				userId: userId
 			})
