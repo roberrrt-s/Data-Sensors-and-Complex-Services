@@ -15,9 +15,7 @@ class Profile extends Component {
 		let userId = cookies.get('userId');
 		let checkForUserId = true;
 
-		console.log(userId)
-
-		if(userId !== 'undefined' && checkForUserId) {
+		if(userId && userId !== 'undefined' && checkForUserId) {
 			fetch('https://api.fantickets.nl/v1/getMyProfile', {
 				method: 'GET',
 				headers: new Headers({
