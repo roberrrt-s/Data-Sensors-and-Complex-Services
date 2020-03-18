@@ -9,17 +9,27 @@ class Profile extends Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {}
+
 		const cookies = new Cookies();
 		let userId = cookies.get('userId');
-		let checkForUserId = false;
+		let checkForUserId = true;
 
-		if(userId && checkForUserId) {
-			fetch(`https://api.fantickets.nl/v1/getMyPreferences?userId=${userId}`)
+		if(userId !== 'undefined' && checkForUserId) {
+			fetch('https://api.fantickets.nl/v1/getMyProfile', {
+				method: 'GET',
+				headers: new Headers({
+					'authorization': `Bearer ${userId}`,
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}),
+			})
 				.then(res => res.json())
 				.then(res => {
-					console.log(res)
 					this.setState({data: res})
-				}).catch(console.log)
+				})
+				.catch(err => {
+					console.log(err)
+				})
 		} else {
 			if(this.props.location.state) {
 				this.state = {
@@ -31,6 +41,7 @@ class Profile extends Component {
 				fetch(`https://api.fantickets.nl/v1/saveSpotifyAccessToken${this.state.user}`)
 					.then(res => res.json())
 					.then(res => {
+						console.log(res)
 						cookies.set('userId', res.access_token, {path: '/'})
 						this.setState({data: res})
 					})
@@ -43,15 +54,11 @@ class Profile extends Component {
 	}
 
 	render() {
-		console.log(this.state)
+		let name = this.state.data ? this.state.data.name : null
+		let email = this.state.data ? this.state.data.email : null
+		let userId = this.state.data ? this.state.data.id : null
 
-		let userInfo = this.state.data && this.state.data.user ? this.state.data.user : null;
-		let name = userInfo && userInfo.name ? userInfo.name : null
-		let email = userInfo && userInfo.email ? userInfo.email : null
-		let userId = userInfo && userInfo.id ? userInfo.id : null
-		let preferences = userInfo && userInfo.preferences ? userInfo.preferences : null
-
-		let listPref = preferences ? Object.keys(preferences).map((key, index) => {
+		let listPref = this.state.data ? Object.keys(this.state.data.preferences).map((key, index) => {
 			return (
 				<li className="list-group-item" key={index}>{key}</li>
 			)

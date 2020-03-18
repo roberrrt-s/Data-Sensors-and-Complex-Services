@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { Link } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 
@@ -17,9 +18,9 @@ class Home extends Component {
 	componentDidMount() {
 		const cookies = new Cookies();
 		let userId = cookies.get('userId');
-		let checkForUserId = false;
+		let checkForUserId = true;
 
-		if(userId && checkForUserId) {
+		if(userId !== undefined && checkForUserId) {
 			this.setState({
 				userId: userId
 			})
@@ -45,7 +46,11 @@ class Home extends Component {
 						<div className="col-md-5 p-lg-5 mx-auto my-5">
 							<h1 className="display-4 font-weight-normal">Fantickets</h1>
 							<p className="lead font-weight-normal">{`You'll always be able to buy tickets to your favourite artists before they become public, using your Spotify account and Fantickets`}</p>
-							<a className="btn btn-outline-secondary" href={this.state.url}>Connect now</a>
+							{this.state.userId ? (
+								<Link to="/profile">View profile</Link>
+							) : (
+								<a className="btn btn-outline-secondary" href={this.state.url}>Connect now</a>
+							)}
 						</div>
 						<div className="product-device box-shadow d-none d-md-block"></div>
 						<div className="product-device product-device-2 box-shadow d-none d-md-block"></div>
