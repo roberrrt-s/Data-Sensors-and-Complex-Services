@@ -9,7 +9,9 @@ class Profile extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {}
+		this.state = {
+			foo: 'bar'
+		}
 
 		const cookies = new Cookies();
 		let userId = cookies.get('userId');
