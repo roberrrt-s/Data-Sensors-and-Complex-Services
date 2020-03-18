@@ -1,3 +1,6 @@
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
 // Default
 @import 'common/variables';
 @import 'common/mixins';
@@ -6,3 +9,4 @@
 // Blocks
 @import 'blocks/b-question';
 @import 'blocks/b-questions';
+@import 'blocks/b-logo';

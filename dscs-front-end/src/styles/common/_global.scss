@@ -21,3 +21,14 @@ body,
 	width: 100%;
 	min-height: 100%;
 }
+
+.site-header {
+	background-color: $m-blue;
+	min-height: 3rem;
+
+	a {
+		color: $white;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+	}
+}

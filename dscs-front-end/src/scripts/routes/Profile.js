@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 
+import Navbar from '../components/Navbar';
+
 class Profile extends Component {
 
 	constructor(props) {
@@ -51,20 +53,25 @@ class Profile extends Component {
 
 		let listPref = preferences ? Object.keys(preferences).map((key, index) => {
 			return (
-				<li key={index}>{key}</li>
+				<li className="list-group-item" key={index}>{key}</li>
 			)
 		}) : null
 
 		return (
-			<main id="profile">
-				{name}<br />
-				{email}<br />
-				{userId}<br />
-
-				<ul>
-					{listPref}
-				</ul>
-			</main>
+			<React.Fragment>
+				<Navbar />
+				<main id="profile">
+					{name}<br />
+					{email}<br />
+					{userId}<br />
+					{listPref ? (
+						<ul className="list-group">
+							<li className="list-group-item"><strong>Favourite artists</strong></li>
+							{listPref}
+						</ul>
+					) : null}
+				</main>
+			</React.Fragment>
 		)
 	}
 }

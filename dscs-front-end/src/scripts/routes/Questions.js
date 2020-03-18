@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import {
-	Link
-} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Question from "../components/Question";
+import Navbar from '../components/Navbar';
 
 class Questions extends Component {
 
@@ -67,7 +65,7 @@ class Questions extends Component {
 
 		givenAnswers.questions.push({
 			questionId: this.state.data.quiz.questions[this.state.currentQuestionId].id,
-			answerId: answer
+			answerId: parseInt(answer, 10)
 		})
 
 		this.setState({
@@ -84,41 +82,49 @@ class Questions extends Component {
 				quizDone: true
 			})
 
-			postData('https://api.fantickets.nl/v1/checkQuizAnswers', givenAnswers)
+			console.log(givenAnswers)
+
+			postData('https://api.fantickets.nl/v1/checkQuizAnswers?sandbox=1', givenAnswers)
 				.then((data) => {
 					if(!data.success) {
 						console.log('error');
-						console.log(this)
-						this.setState({ callbackError: data.error })
+						console.log(data)
+						if(data.error) {
+							this.setState({ callbackError: data.error })
+						} else {
+							this.setState({ callbackError: 'One or more answers were wrong, try again another time'})
+						}
 					} else {
-						this.setState({ ticketUrl: data.error })
+						this.setState({ ticketUrl: data.ticketUrl })
 					}
-				});
+				}).catch(err => console.log);
 
 		}
 	}
 
 	render() {
 		return (
-			<main id="questions">
-				<h1>Questions</h1>
-					<div className="b-questions">
-						{this.state.loading && !this.state.data && !this.state.quizDone ? (
-							<p>Loading questions..</p>
-						) : !this.state.loading && !this.state.data && !this.state.quizDone ? (
-							<p>Token expired</p>
-						) : this.state.data && !this.state.quizDone ? (
-							<Question cb={this.onClickHandler.bind(this)} question={this.state.data.quiz.questions[this.state.currentQuestionId]} questionId={this.state.currentQuestionId}/>
-						) : this.state.quizDone && this.state.callbackError ? (
-							<p>{this.state.callbackError}</p>
-						) : this.state.quizDone && this.state.ticketUrl ? (
-							<a href={this.state.ticketUrl}>Buy tickets</a>
-						) : this.state.data && this.state.quizDone ? (
-							<p>{`Quiz done! Checking your results.....`}</p>
-						) : null }
-						<Link to="/results">View results</Link>
-					</div>
-			</main>
+			<React.Fragment>
+				<Navbar />
+				<main id="questions">
+					<h1>Questions</h1>
+						<div className="b-questions">
+							{this.state.loading && !this.state.data && !this.state.quizDone ? (
+								<p>Loading questions..</p>
+							) : !this.state.loading && !this.state.data && !this.state.quizDone ? (
+								<p>Token expired</p>
+							) : this.state.data && !this.state.quizDone ? (
+								<Question cb={this.onClickHandler.bind(this)} question={this.state.data.quiz.questions[this.state.currentQuestionId]} questionId={this.state.currentQuestionId}/>
+							) : this.state.quizDone && this.state.callbackError ? (
+								<p>{this.state.callbackError}</p>
+							) : this.state.quizDone && this.state.ticketUrl ? (
+								<a href={this.state.ticketUrl}>Buy tickets</a>
+							) : this.state.data && this.state.quizDone ? (
+								<p>{`Quiz done! Checking your results.....`}</p>
+							) : null }
+						</div>
+				</main>
+			</React.Fragment>
 		)
 	}
 }

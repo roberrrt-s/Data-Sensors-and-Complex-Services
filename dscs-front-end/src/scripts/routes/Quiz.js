@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import Navbar from '../components/Navbar';
+
 class Quiz extends Component {
 
 	constructor(props) {
@@ -16,9 +18,12 @@ class Quiz extends Component {
 
 	render() {
 		return (
-			<main id="quiz">
-				<Link to={`/questions/${this.state.matchId}`}>Start the quiz</Link>
-			</main>
+			<React.Fragment>
+				<Navbar />
+				<main id="quiz">
+					<Link to={`/questions/${this.state.matchId}`}>Start the quiz</Link>
+				</main>
+			</React.Fragment>
 		)
 	}
 }
