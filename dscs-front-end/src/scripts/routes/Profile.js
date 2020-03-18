@@ -63,8 +63,7 @@ class Profile extends Component {
 
 		let listPref = this.state.data ? Object.keys(this.state.data.preferences).map((key, index) => {
 			return (
-				<li className="list-group-item" key={index}><span>{key}</span><button type="button" className="btn btn-primary get-notifications">Get notifications</button>
-</li>
+				<li className="list-group-item" key={index}>{key}</li>
 			)
 		}) : null
 
@@ -75,6 +74,7 @@ class Profile extends Component {
 					{name}<br />
 					{email}<br />
 					{userId}<br />
+					{listPref ? ( <button type="button" className="btn btn-primary get-notifications">Get notifications</button>) : null }<br />
 					{listPref ? (
 						<ul className="list-group">
 							<li className="list-group-item"><strong>Favourite artists</strong></li>
