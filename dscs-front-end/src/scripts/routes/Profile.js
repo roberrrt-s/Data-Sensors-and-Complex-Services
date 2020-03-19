@@ -15,7 +15,7 @@ class Profile extends Component {
 			foo: 'bar'
 		}
 
-    this.subscribeUser = subscribeUser; // binding doesnt work
+    this.subscribeUser = subscribeUser;
 
 		const cookies = new Cookies();
 		let userId = cookies.get('userId');
@@ -23,8 +23,7 @@ class Profile extends Component {
 
 		if(userId && userId !== 'undefined' && checkForUserId) {
 
-      // this.subscribeUser = subscribeUser.bind(userId); // binding doesnt work
-      this.access_token = userId; // so make access_token available
+      this.access_token = userId;
 
 			fetch(`${process.env.REACT_APP_FANTICKETS_API}getMyProfile`, {
 				method: 'GET',
@@ -56,9 +55,7 @@ class Profile extends Component {
             if(res.success === true) {
               cookies.set('userId', res.access_token, {path: '/'})
               this.setState({data: res.user})
-
-              // this.subscribeUser = subscribeUser.bind(res.access_token); // binding doesnt work
-              this.access_token = res.access_token; // so make access_token available
+              this.access_token = res.access_token;
             } else {
               console.log('Error during spotify callback:', res.error)
             }
