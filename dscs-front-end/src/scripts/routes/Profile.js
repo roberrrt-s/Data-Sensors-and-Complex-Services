@@ -4,6 +4,8 @@ import Cookies from 'universal-cookie';
 
 import Navbar from '../components/Navbar';
 
+import { subscribeUser } from '../push/subscription';
+
 class Profile extends Component {
 
 	constructor(props) {
@@ -13,12 +15,18 @@ class Profile extends Component {
 			foo: 'bar'
 		}
 
+    this.subscribeUser = subscribeUser; // binding doesnt work
+
 		const cookies = new Cookies();
 		let userId = cookies.get('userId');
 		let checkForUserId = true;
 
 		if(userId && userId !== 'undefined' && checkForUserId) {
-			fetch('https://api.fantickets.nl/v1/getMyProfile', {
+
+      // this.subscribeUser = subscribeUser.bind(userId); // binding doesnt work
+      this.access_token = userId; // so make access_token available
+
+			fetch(`${process.env.REACT_APP_FANTICKETS_API}getMyProfile`, {
 				method: 'GET',
 				headers: new Headers({
 					'authorization': `Bearer ${userId}`,
@@ -41,12 +49,19 @@ class Profile extends Component {
 			}
 
 			if(this.state && this.state.user) {
-				fetch(`https://api.fantickets.nl/v1/saveSpotifyAccessToken${this.state.user}`)
+				fetch(`${process.env.REACT_APP_FANTICKETS_API}saveSpotifyAccessToken${this.state.user}`)
 					.then(res => res.json())
 					.then(res => {
 						console.log(res)
-						cookies.set('userId', res.access_token, {path: '/'})
-						this.setState({data: res})
+            if(res.success === true) {
+              cookies.set('userId', res.access_token, {path: '/'})
+              this.setState({data: res.user})
+
+              // this.subscribeUser = subscribeUser.bind(res.access_token); // binding doesnt work
+              this.access_token = res.access_token; // so make access_token available
+            } else {
+              console.log('Error during spotify callback:', res.error)
+            }
 					})
 			}
 		}
@@ -61,11 +76,25 @@ class Profile extends Component {
 		let email = this.state.data ? this.state.data.email : null
 		let userId = this.state.data ? this.state.data.id : null
 
-		let listPref = this.state.data ? Object.keys(this.state.data.preferences).map((key, index) => {
-			return (
-				<li className="list-group-item" key={index}>{key}</li>
-			)
-		}) : null
+    let listPref = null;
+    if (this.state.data) {
+      if (this.state.data.preferences) {
+        listPref = Object.keys(this.state.data.preferences).map((key, index) => {
+          return (
+            <li className="list-group-item" key={index}>
+              {key}
+            </li>
+          );
+        });
+      } else {
+        // This annoying bug should be fixed now!
+        console.log(
+          "this.state.data.preferences would throw annoying undefined error",
+          this.state.data
+        );
+      }
+    }
+
 
 		return (
 			<React.Fragment>
@@ -74,7 +103,7 @@ class Profile extends Component {
 					{name}<br />
 					{email}<br />
 					{userId}<br />
-					{listPref ? ( <button type="button" className="btn btn-primary get-notifications">Get notifications</button>) : null }<br />
+					{listPref ? ( <button type="button" className="btn btn-primary get-notifications" onClick={() => this.subscribeUser(this.access_token)}>Get notifications</button>) : null }<br />
 					{listPref ? (
 						<ul className="list-group">
 							<li className="list-group-item"><strong>Favourite artists</strong></li>

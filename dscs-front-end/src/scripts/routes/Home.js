@@ -27,7 +27,7 @@ class Home extends Component {
 		}
 
 		else {
-			fetch('https://api.fantickets.nl/v1/getSpotifyLoginUrl')
+			fetch(`${process.env.REACT_APP_FANTICKETS_API}getSpotifyLoginUrl`)
 				.then(res => res.json())
 				.then(res =>
 					this.setState({

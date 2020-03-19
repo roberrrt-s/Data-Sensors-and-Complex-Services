@@ -24,7 +24,7 @@ class Questions extends Component {
 			}
 		}
 
-		fetch(`https://api.fantickets.nl/v1/getMatch?matchId=${this.state.matchId}&sandbox=1`)
+		fetch(`${process.env.REACT_APP_FANTICKETS_API}getMatch?matchId=${this.state.matchId}&sandbox=1`)
 			.then(res => res.json())
 			.then(res => {
 				if(res.success) {
@@ -84,7 +84,7 @@ class Questions extends Component {
 
 			console.log(givenAnswers)
 
-			postData('https://api.fantickets.nl/v1/checkQuizAnswers?sandbox=1', givenAnswers)
+			postData(`${process.env.REACT_APP_FANTICKETS_API}checkQuizAnswers?sandbox=1`, givenAnswers)
 				.then((data) => {
 					if(!data.success) {
 						console.log('error');
