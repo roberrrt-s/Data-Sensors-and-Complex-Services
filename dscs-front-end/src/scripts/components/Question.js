@@ -32,7 +32,7 @@ class Question extends Component {
 		this.setState({
 			answer: ''
 		}, () => {
-			this.props.cb(answer)
+			this.props.cb(answer, this.props.question.type)
 		})
 	}
 

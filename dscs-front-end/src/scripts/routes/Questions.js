@@ -39,7 +39,7 @@ class Questions extends Component {
 
 	}
 
-	onClickHandler(answer) {
+	onClickHandler(answer, type) {
 
 		async function postData(url = '', data = {}) {
 			// Default options are marked with *
@@ -60,13 +60,21 @@ class Questions extends Component {
 		}
 
 		console.log('user answered:', answer)
+		console.log('for question type', type)
 
 		let givenAnswers = JSON.parse(JSON.stringify(this.state.givenAnswers))
 
-		givenAnswers.questions.push({
-			questionId: this.state.data.quiz.questions[this.state.currentQuestionId].id,
-			answerId: parseInt(answer, 10)
-		})
+		if(type === 'albumcover') {
+			givenAnswers.questions.push({
+				questionId: this.state.data.quiz.questions[this.state.currentQuestionId].id,
+				answerId: parseInt(answer, 10)
+			})
+		} else {
+			givenAnswers.questions.push({
+				questionId: this.state.data.quiz.questions[this.state.currentQuestionId].id,
+				answerValue: answer
+			})
+		}
 
 		this.setState({
 			givenAnswers: givenAnswers
@@ -97,7 +105,9 @@ class Questions extends Component {
 					} else {
 						this.setState({ ticketUrl: data.ticketUrl })
 					}
-				}).catch(err => console.log);
+				}).catch(err => {
+					console.log(err)
+				});
 
 		}
 	}
