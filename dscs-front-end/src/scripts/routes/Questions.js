@@ -117,22 +117,24 @@ class Questions extends Component {
 			<React.Fragment>
 				<Navbar />
 				<main id="questions">
-					<h1>Questions</h1>
-						<div className="b-questions">
-							{this.state.loading && !this.state.data && !this.state.quizDone ? (
-								<p>Loading questions..</p>
-							) : !this.state.loading && !this.state.data && !this.state.quizDone ? (
-								<p>Token expired</p>
-							) : this.state.data && !this.state.quizDone ? (
-								<Question cb={this.onClickHandler.bind(this)} question={this.state.data.quiz.questions[this.state.currentQuestionId]} questionId={this.state.currentQuestionId}/>
-							) : this.state.quizDone && this.state.callbackError ? (
-								<p>{this.state.callbackError}</p>
-							) : this.state.quizDone && this.state.ticketUrl ? (
-								<a href={this.state.ticketUrl}>Buy tickets</a>
-							) : this.state.data && this.state.quizDone ? (
-								<p>{`Quiz done! Checking your results.....`}</p>
-							) : null }
-						</div>
+					<div className="b-questions">
+						{this.state.loading && !this.state.data && !this.state.quizDone ? (
+							<p>Loading questions..</p>
+						) : !this.state.loading && !this.state.data && !this.state.quizDone ? (
+							<p>Token expired</p>
+						) : this.state.data && !this.state.quizDone ? (
+							<Question cb={this.onClickHandler.bind(this)} question={this.state.data.quiz.questions[this.state.currentQuestionId]} questionId={this.state.currentQuestionId}/>
+						) : this.state.quizDone && this.state.callbackError ? (
+							<p>{this.state.callbackError}</p>
+						) : this.state.quizDone && this.state.ticketUrl ? (
+							<div className="col-md-5 p-lg-5 mx-auto my-5">
+								<p>{`Congratulations! You've proven to be a real fan, click the button to buy your tickets!`}</p>
+								<a className="btn btn-primary" href={this.state.ticketUrl}>Buy tickets</a>
+							</div>
+						) : this.state.data && this.state.quizDone ? (
+							<p>{`Quiz done! Checking your results.....`}</p>
+						) : null }
+					</div>
 				</main>
 			</React.Fragment>
 		)

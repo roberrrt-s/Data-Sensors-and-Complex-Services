@@ -119,7 +119,7 @@ class Question extends Component {
 					<div className="b-question__questions">
 						{options}
 					</div>
-					<input ref={this.form} type="submit" value="Submit answer" />
+					<input className="btn btn-secondary" ref={this.form} type="submit" value="Submit answer" />
 				</form>
 			</div>
 		)

@@ -21,7 +21,12 @@ class Quiz extends Component {
 			<React.Fragment>
 				<Navbar />
 				<main id="quiz">
-					<Link to={`/questions/${this.state.matchId}`}>Start the quiz</Link>
+					<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+						<div className="col-md-5 p-lg-5 mx-auto my-5">
+							<p>{`You have a match! Answer the following questions to verify you're a real fan, once you answered them correctly, you can buy the tickets!`}</p>
+							<Link className="btn btn-outline-secondary" to={`/questions/${this.state.matchId}`}>Start the quiz</Link>
+						</div>
+					</div>
 				</main>
 			</React.Fragment>
 		)
