@@ -47,8 +47,6 @@ class Question extends Component {
 	}
 
 	renderOptions() {
-		let uuid = Math.random().toString(36).substring(2, 8);
-
 		if(this.props.question.type === 'lyrics') {
 			console.log(this.props.question)
 			return (
@@ -62,7 +60,7 @@ class Question extends Component {
 				this.props.question.multipleChoice.answers.map((el, i) => {
 					return (
 						<div onChange={this.onChange} className="b-question__label" key={i} id={`answer-${el.id}`}>
-							<input name={`answer-${uuid}`} type="radio" value={el.id} id={`id-${el.id}`} />
+							<input name={`answer`} type="radio" value={el.id} id={`id-${el.id}`} />
 							<label htmlFor={`id-${el.id}`}><img className="b-question__image" src={el.value} alt={`Cover image for answer ${el.id}`} /></label>
 						</div>
 					)
@@ -112,15 +110,20 @@ class Question extends Component {
 
 		return (
 			<div className={`b-question ${this.props.question.type}`}>
-				<p>Question {this.props.questionId + 1}<span> time left: {this.state.counter}</span></p>
-				<h3>{this.props.question.instruction}</h3>
-				<h4>{this.props.question.question}</h4>
-				<form id="form" onSubmit={this.onSubmit.bind(this)}>
-					<div className="b-question__questions">
-						{options}
+				<div className="b-question__counter"><span>Time left to answer: {this.state.counter}</span></div>
+				<div className="row no-gutters rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+					<div className="col p-4 d-flex flex-column position-static">
+						<p className="card-text mb-auto text-muted">Question {this.props.questionId + 1}</p>
+						<h3 className="mb-0">{this.props.question.question}</h3>
+						<div className="mb-1 text-muted">{this.props.question.instruction}</div>
+						<form id="form" onSubmit={this.onSubmit.bind(this)}>
+							<div className="b-question__questions">
+								{options}
+							</div>
+							<input className="btn btn-secondary" ref={this.form} type="submit" value="Submit answer" />
+						</form>
 					</div>
-					<input className="btn btn-secondary" ref={this.form} type="submit" value="Submit answer" />
-				</form>
+				</div>
 			</div>
 		)
 	}

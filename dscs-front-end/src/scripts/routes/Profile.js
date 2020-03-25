@@ -97,10 +97,14 @@ class Profile extends Component {
 			<React.Fragment>
 				<Navbar />
 				<main id="profile">
-					{name}<br />
-					{email}<br />
-					{userId}<br />
-					{listPref ? ( <button type="button" className="btn btn-primary get-notifications" onClick={() => this.subscribeUser(this.access_token)}>Get notifications</button>) : null }<br />
+					<div className="row no-gutters rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+						<div className="col p-4 d-flex flex-column position-static">
+							<h3 className="mb-0">{name}</h3>
+							<div className="mb-1">{email}</div>
+							<p className="card-text mb-auto text-muted">User ID: {userId}</p>
+							{listPref ? ( <button type="button" className="btn btn-primary get-notifications" onClick={() => this.subscribeUser(this.access_token)}>Get notifications</button>) : null }<br />
+						</div>
+					</div>
 					{listPref ? (
 						<ul className="list-group">
 							<li className="list-group-item"><strong>Favourite artists</strong></li>

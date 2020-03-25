@@ -119,20 +119,38 @@ class Questions extends Component {
 				<main id="questions">
 					<div className="b-questions">
 						{this.state.loading && !this.state.data && !this.state.quizDone ? (
-							<p>Loading questions..</p>
+							<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+								<div className="col-md-5 p-lg-5 mx-auto my-5">
+									<p>{`Loading your questions now...`}</p>
+								</div>
+							</div>
 						) : !this.state.loading && !this.state.data && !this.state.quizDone ? (
-							<p>Token expired</p>
+							<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+								<div className="col-md-5 p-lg-5 mx-auto my-5">
+									<p>{`This match has already been used!`}</p>
+								</div>
+							</div>
 						) : this.state.data && !this.state.quizDone ? (
 							<Question cb={this.onClickHandler.bind(this)} question={this.state.data.quiz.questions[this.state.currentQuestionId]} questionId={this.state.currentQuestionId}/>
 						) : this.state.quizDone && this.state.callbackError ? (
-							<p>{this.state.callbackError}</p>
+							<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+								<div className="col-md-5 p-lg-5 mx-auto my-5">
+									<p>{this.state.callbackError}</p>
+								</div>
+							</div>
 						) : this.state.quizDone && this.state.ticketUrl ? (
-							<div className="col-md-5 p-lg-5 mx-auto my-5">
-								<p>{`Congratulations! You've proven to be a real fan, click the button to buy your tickets!`}</p>
-								<a className="btn btn-primary" href={this.state.ticketUrl}>Buy tickets</a>
+							<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+								<div className="col-md-5 p-lg-5 mx-auto my-5">
+									<p>{`Congratulations! You've proven to be a real fan, click the button to buy your tickets!`}</p>
+									<a className="btn btn-primary" href={this.state.ticketUrl}>Buy tickets</a>
+								</div>
 							</div>
 						) : this.state.data && this.state.quizDone ? (
-							<p>{`Quiz done! Checking your results.....`}</p>
+							<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+								<div className="col-md-5 p-lg-5 mx-auto my-5">
+									<p>{`Quiz done! Checking your results.....`}</p>
+								</div>
+							</div>
 						) : null }
 					</div>
 				</main>
