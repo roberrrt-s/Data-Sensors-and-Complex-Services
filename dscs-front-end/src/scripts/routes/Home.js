@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
+import YouTube from 'react-youtube';
 
 import Navbar from '../components/Navbar';
 
@@ -54,6 +55,14 @@ class Home extends Component {
 						</div>
 						<div className="product-device box-shadow d-none d-md-block"></div>
 						<div className="product-device product-device-2 box-shadow d-none d-md-block"></div>
+					</div>
+					<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+						<div>
+							<p className="lead font-weight-normal">{`Want to know how Fantickets works?`}</p>
+							<YouTube
+								videoId={`NjPdLPCtoMA`}
+							/>
+						</div>
 					</div>
 				</main>
 			</React.Fragment>
