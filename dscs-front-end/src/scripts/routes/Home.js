@@ -43,12 +43,13 @@ class Home extends Component {
 			<React.Fragment>
 				<Navbar url={this.state.url} />
 				<main id="home">
-					<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+					<div className="position-relative overflow-hidden">
+						<div className="splash-bg"></div>
 						<div className="col-md-5 p-lg-5 mx-auto my-5">
-							<h1 className="display-4 font-weight-normal">Fantickets</h1>
-							<p className="lead font-weight-normal">{`You'll always be able to buy tickets to your favourite artists before they become public, using your Spotify account and Fantickets`}</p>
+							<h1 className="shdw display-4 font-weight-normal">Fantickets</h1>
+							<p className="shdw lead font-weight-normal">{`You'll always be able to buy tickets to your favourite artists before they become public, using your Spotify account and Fantickets`}</p>
 							{this.state.userId ? (
-								<Link to="/profile">View profile</Link>
+								<Link className="btn btn-primary" to="/profile">View profile</Link>
 							) : (
 								<a className="btn btn-outline-secondary" href={this.state.url}>Connect now</a>
 							)}
@@ -57,10 +58,11 @@ class Home extends Component {
 						<div className="product-device product-device-2 box-shadow d-none d-md-block"></div>
 					</div>
 					<div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-						<div>
+						<div className="youtube-container">
 							<p className="lead font-weight-normal">{`Want to know how Fantickets works?`}</p>
 							<YouTube
-								videoId={`NjPdLPCtoMA`}
+								videoId={`_r4Z9Xx-sxY`}
+								containerClassName={`embed-container`}
 							/>
 						</div>
 					</div>

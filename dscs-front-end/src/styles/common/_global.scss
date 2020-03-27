@@ -33,7 +33,56 @@ body,
 	}
 }
 
+#home {
+	> div:first-child {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+	}
+
+	.shdw {
+		color: white !important;
+		text-shadow: 0px 0px 4px #000000;
+	}
+
+	.splash-bg {
+		background-image: url('../../assets/splash.jpeg');
+		background-size: cover;
+		background-position: center center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		pointer-events: none;
+		opacity: 1;
+	}
+}
+
 .get-notifications {
 	margin-right: auto;
 	margin-top: 1rem;
+}
+
+.embed-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width: 100%;
+	margin: auto;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.youtube-container {
+	max-width: 40rem;
+	margin: auto;
 }

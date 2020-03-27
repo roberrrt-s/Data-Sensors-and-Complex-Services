@@ -15,7 +15,7 @@ class Navbar extends Component {
 			<nav className="site-header sticky-top py-1">
 				<div className="container d-flex flex-column flex-md-row justify-content-between">
 					<div className="b-logo">
-						<Link to="/"><Logo /></Link>
+						<Link to="/">Fantickets.nl</Link>
 					</div>
 					{this.props.url ? <a href={this.props.url}>Log in</a> : null }
 				</div>
